@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      # MONGO_INITDB_ROOT_USERNAME: root
+      # MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: database
+    volumes:
+      - ./mongo-data:/data/db 
+    command: ["mongod", "--bind_ip", "0.0.0.0"]
+    networks:
+      - app-net
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./gateway/src/main/resources/logback-spring.xml:/app/config/logback-spring.xml
+      - ./gateway/logs:/app/logs
+    env_file:
+      - ./env/gateway.env
+    environment:
+      - SPRING_CONFIG_LOCATION=classpath:/application.properties
+      - LOGGING_CONFIG=/app/config/logback-spring.xml
+    networks:
+      - app-net
+
+  user-service:
+    container_name: user-service
+    build:
+      context: ./users-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./env/user-service.env
+    environment:
+        # - LOG_PATH=/var/logs/users-service
+        # - LOG_LEVEL=INFO
+        - SERVICE_NAME=user-service
+        - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/database
+    ports:
+        - "8081:8080"
+    networks:
+        - app-net
+
+  order-service:
+    container_name: order-service
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./env/order-service.env
+    environment:
+        # - LOG_PATH=/var/logs/order-service
+        # - LOG_LEVEL=WARN
+        - SERVICE_NAME=order-service
+    ports:
+        - "8082:8080"
+    networks:
+        - app-net
+  
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    environment:
+      # The location of the RabbitMQ server.  "amqp" is the protocol;
+      # "rabbitmq" is the hostname.  Note that there is not a guarantee
+      # that the server will start first!  Telling the pika client library
+      # to try multiple times gets around this ordering issue.
+      AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_CONFIG_FILE: "/etc/rabbitmq/rabbitmq"
+    volumes:
+    - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    networks:
+      - app-net
+    
+networks:
+    app-net:

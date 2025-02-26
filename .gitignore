@@ -1,0 +1,13 @@
+# Docker volumes
+volumes/
+db_data/
+
+# log
+logs/
+*.log
+
+# env var
+.env
+
+# db
+mongo-data/
