@@ -7,7 +7,7 @@ logs/
 *.log
 
 # env var
-.env
+# .env
 
 # db
 mongo-data/
