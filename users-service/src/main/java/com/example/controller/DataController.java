@@ -41,7 +41,7 @@ public class DataController {
         return deleteUserService.deleteUser(userID);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/delete")
     public ResponseEntity<?> updateUser (
             @RequestBody UpdateUserRequest request) {
         return ResponseEntity.ok(updateUserService.updateUser(request));
