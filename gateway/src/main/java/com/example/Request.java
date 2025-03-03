@@ -14,10 +14,5 @@ public class Request {
 
     public Request() {
     }
-    public Request(String method, String url, String body) {
-        this.method = method;
-        this.url = url;
-        this.body = body;
-    }
 
 }
