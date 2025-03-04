@@ -19,4 +19,8 @@ public class Request {
         this.method = method;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
 }
