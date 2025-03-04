@@ -74,7 +74,6 @@ services:
       - '5672:5672'
       # HTTP management UI
       - '15672:15672'
-    user: "root"
     environment:
       AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
       RABBITMQ_DEFAULT_USER: "guest"
@@ -82,7 +81,8 @@ services:
       RABBITMQ_CONFIG_FILE: "/etc/rabbitmq/rabbitmq"
     volumes:
     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-    
+    command: >
+      sh -c "chmod 777 /etc/rabbitmq/rabbitmq.config && exec docker-entrypoint.sh rabbitmq-server"
     networks:
       - app-net
     
