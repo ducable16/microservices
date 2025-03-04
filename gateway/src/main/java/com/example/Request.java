@@ -13,7 +13,9 @@ public class Request {
     public String getMethod() {
         return method;
     }
-
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
 
 }
