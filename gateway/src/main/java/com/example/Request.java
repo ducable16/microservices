@@ -16,6 +16,9 @@ public class Request {
     public void setMethod(String method) {
         this.method = method;
     }
+    public String getUrl() {
+        return url;
+    }
 
 
 }
