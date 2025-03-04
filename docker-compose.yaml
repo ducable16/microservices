@@ -81,6 +81,7 @@ services:
       RABBITMQ_CONFIG_FILE: "/etc/rabbitmq/rabbitmq"
     volumes:
     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    - /var/jenkins_home/workspace/microservices/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
     networks:
       - app-net
     
