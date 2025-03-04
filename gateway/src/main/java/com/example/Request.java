@@ -12,7 +12,5 @@ public class Request {
         this.body = body;
     }
 
-    public Request() {
-    }
 
 }
