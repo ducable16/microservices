@@ -21,7 +21,7 @@ services:
       context: ./gateway
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8090:8090"
     volumes:
       - ./gateway/src/main/resources/logback-spring.xml:/app/config/logback-spring.xml
       - ./gateway/logs:/app/logs
