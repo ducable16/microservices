@@ -5,6 +5,13 @@ public class Request {
     private String url;
     private String body;
 
+    public Request(String method, String url, String body) {
+        this.method = method;
+        this.url = url;
+        this.body = body;
+
+
+    }
 
 
 }
