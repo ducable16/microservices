@@ -11,6 +11,8 @@ public class Request {
     public void setBody(String body) {
         this.body = body;
     }
-
+    public String getMethod() {
+        return method;
+    }
 
 }
