@@ -22,6 +22,9 @@ public class Request {
     public void setUrl(String url) {
         this.url = url;
     }
+    public String getBody() {
+        return body;
+    }
 
 
 }
