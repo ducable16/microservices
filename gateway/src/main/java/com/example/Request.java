@@ -15,7 +15,7 @@ public class Request {
     }
     public void setMethod(String method) {
         this.method = method;
-        int x = 6;
+        int x = 7;
     }
 
 
