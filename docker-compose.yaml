@@ -22,12 +22,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8090:8090"
-    volumes:
+    # volumes:
       # - ./gateway/src/main/resources/logback-spring.xml:/app/config/logback-spring.xml
       # - ./gateway/logs:/app/logs
     env_file:
       - ./env/gateway.env
-    environment:
+    # environment:
       # - SPRING_CONFIG_LOCATION=classpath:/application.properties
       # - LOGGING_CONFIG=/app/config/logback-spring.xml
     networks:
