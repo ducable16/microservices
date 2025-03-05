@@ -1,10 +1,9 @@
-
 FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
 # Copy the pre-built JAR file into the container
-COPY ./users-service/*.jar app.jar
+COPY ./app/target/*.jar app.jar
 
 # Expose the port your application runs on
 EXPOSE 8090
