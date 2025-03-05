@@ -3,7 +3,7 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Copy the pre-built JAR file into the container
-COPY ./build_output/gatway/*.jar app.jar
+COPY ./gatway/*.jar app.jar
 
 # Expose the port your application runs on
 EXPOSE 8090
