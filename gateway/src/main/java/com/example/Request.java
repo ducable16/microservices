@@ -16,6 +16,7 @@ public class Request {
     public void setMethod(String method) {
         this.method = method;
         int x = 1;
+        int k = 11;
         int y = 1;
     }
 
